@@ -1,0 +1,169 @@
+openapi: 3.0.1
+servers:
+  - description: Index swagger
+    #url local
+    #- url: https://localhost:8080
+    #url produccion
+    url: https://api.samtel.co
+info:
+  description: Servicio de entidad Usuario.
+  version: 0.0.1
+  title: Usuarios
+  contact:
+    name: Samtel
+    url: https://www.samtel.co/
+    email: api@samtel.co
+  license:
+    name: GNU GPLv3
+    url: ‘https://www.gnu.org/licenses/gpl-3.0.html’
+tags:
+  - name: Usuarios
+    description: Gestion de usuarios
+#----------------------------
+#Endpoints de la Entidad
+#-------------------------------------------------------------------------------
+paths:
+  /v1/es/crearUsuario:
+    post:
+      tags:
+        - Crear usuario
+      operationId: crearUsuario
+      requestBody:
+        description: Crear usuario
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsuarioTypeInput"
+      responses:
+        "200":
+          description: Usuario creado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
+
+  #-------------------------------------------------------------------------------
+  /v1/es/eliminarUsuario/{idtbl_user}:
+    delete:
+      tags:
+        - Eliminar Usuario
+      parameters:
+        - in: path
+          name: idtbl_user
+          required: true
+          schema:
+            type: integer
+            minimum: usuario por ID
+      operationId: eliminarUsuario
+      responses:
+        "200":
+          description: Usuario eliminado
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
+#-------------------------------------------------------------------------------
+  /v1/es/editarUsuario/{idtbl_user}:
+    put:
+      tags:
+        - Editar Usuario
+      parameters:
+        - in: path
+          name: idtbl_user
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: usuario por ID
+      operationId: editarUsuario
+      requestBody:
+        description: Editar usuario
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsuarioTypeInput"
+        operationId: editarUsuario
+      responses:
+        "200":
+          description: Usuario Editado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
+  #-------------------------------------------------------------------------------
+  /v1/es/listarUsuario/{idtbl_user}:
+    get:
+      tags:
+        - Listar usuario
+      parameters:
+        - in: path
+          name: idtbl_user
+          required: true
+          schema:
+            type: integer
+            minimum: usuario por ID
+      operationId: listarUsuario
+      responses:
+        "200":
+          description: Buscar usurario por ID .
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
+
+  #-------------------------------------------------------------------------------
+  /v1/es/listarUsuarios:
+    get:
+      tags:
+        - Listar todos los usuario
+      operationId: listarTodosLosUsuario
+      responses:
+        "200":
+          description: Listar Usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
+
+#Se declaran los Modelos/Schemas del servicio
+#---------------------------------------------
+components:
+  schemas:
+    UsuarioTypeResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+    UsuarioTypeInput:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
