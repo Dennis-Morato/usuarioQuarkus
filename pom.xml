@@ -144,6 +144,7 @@
                 <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
                 <generateAdditionalProperties>true</generateAdditionalProperties>
                 <validateSpec>false</validateSpec>
+                <returnResponse>true</returnResponse>
               </configOptions>
             </configuration>
           </execution>

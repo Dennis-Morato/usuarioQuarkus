@@ -24,4 +24,6 @@ public class Usuario implements Serializable {
     public String name;
     @Column(name = "tbl_lastName")
     public String lastname;
+
+
 }

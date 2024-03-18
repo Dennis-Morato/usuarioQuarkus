@@ -1,4 +1,4 @@
-package co.samtel.usuario.utils;
+package co.samtel.usuario.utils.mapper;
 
 import co.samtel.usuario.entity.Usuario;
 import co.samtel.usuario.gen.type.UsuarioTypeInput;
