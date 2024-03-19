@@ -103,7 +103,7 @@ paths:
         "404":
           description: "No se encuentra la novedad."
   #-------------------------------------------------------------------------------
-  /v1/es/listarUsuario/{idtbl_user}:
+  /v1/es/bucarUsuarioPorId/{idtbl_user}:
     get:
       tags:
         - Listar usuario
@@ -114,7 +114,7 @@ paths:
           schema:
             type: integer
             minimum: usuario por ID
-      operationId: listarUsuario
+      operationId: bucarUsuarioPorId
       responses:
         "200":
           description: Buscar usurario por ID .
@@ -130,7 +130,7 @@ paths:
           description: "No se encuentra la novedad."
 
   #-------------------------------------------------------------------------------
-  /v1/es/listarUsuarios:
+  /v1/es/listarTodosLosUsuario:
     get:
       tags:
         - Listar todos los usuario
