@@ -34,7 +34,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Transactional
     public UsuarioTypeResponse crearUsuario(UsuarioTypeInput usuarioTypeInput) {
-        LOG.info("Inicia crearUsuarioImpl");
+        LOG.info("Inicia crear usuario impl");
         try {
             Usuario usuario = usuarioMapper.usuarioTypeToEntity(usuarioTypeInput);
             usuarioDao.persist(usuario);
@@ -42,7 +42,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
             LOG.info("Persis usuario");
             return response;
         }catch (ApplicationException e){
-            LOG.error("Error al crear usuario");
+            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "crear usuario impl");
             throw new ApplicationException(ERROR_SERVICIO + e.getMessage());
         }
     }
@@ -55,7 +55,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
             usuarioDao.deleteById(idUsuario);
             LOG.info("Se termina proceso de eliminar usuario impl");
         }catch (ApplicationException e){
-            LOG.error("Se presento el siguiente error al eliminar el usuario impl " + e.getMessage());
+            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "eliminar usuario impl");
             throw new ApplicationException(ERROR_SERVICIO + e.getMessage());
         }
     }
@@ -75,13 +75,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
             LOG.info("Se finaliza proceso de editar usuario impl");
             return usuarioTypeResponse;
         }catch (ApplicationException e){
-            LOG.error("Se presento el siguiente error editado el usuario impl" + e.getMessage());
+            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "editar usuario impl");
             throw new ApplicationException(ERROR_SERVICIO + e.getMessage());
         }
     }
 
     public UsuarioTypeResponse bucarUsuarioPorId(Integer idtblUser) {
-        LOG.info("Se inicia proceso de listar usuario por id impl");
+        LOG.info("Se inicia proceso de buscar usuario por id impl");
         try{
             Long idUsuario = Long.valueOf(idtblUser);
             Usuario usuario = usuarioDao.findById(idUsuario);
@@ -89,7 +89,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
             LOG.info("Se termina proceso de listar usuario por id impl");
             return usuarioTypeResponse;
         }catch (ApplicationException e){
-            LOG.error("Se presento el siguiente error listando al usuario por id impl " + e.getMessage());
+            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "buscar usuario por id impl");
             throw new ApplicationException(ERROR_SERVICIO + e.getMessage());
         }
     }
@@ -102,7 +102,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
             LOG.info("Se finaliza proceso de listar todos los usuarios Impl");
             return usuarioMapper.usuariosTypeListEntityToTypeResponse(usuario);
         }catch(ApplicationException e){
-            LOG.error("Se presento un error al listar todos los usuario"+ e.getMessage());
+             LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "listar todos los usuarios impl");
             throw new ApplicationException(ERROR_SERVICIO + e.getMessage());
         }
     }
