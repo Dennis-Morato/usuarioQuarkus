@@ -48,12 +48,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Transactional
-    public UsuarioTypeResponse eliminarUsuario(Integer idtblUser){
+    public void eliminarUsuario(Integer idtblUser){
         LOG.info("Se inicia proceso de eliminar usuario impl");
         try {
             Long idUsuario = Long.valueOf(idtblUser);
             usuarioDao.deleteById(idUsuario);
-            return
             LOG.info("Se termina proceso de eliminar usuario impl");
         }catch (ApplicationException e){
             LOG.error("Se presento el siguiente error al eliminar el usuario impl " + e.getMessage());
@@ -95,13 +94,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
         }
     }
 
-    public UsuarioTypeResponse listarTodosLosUsuario() {
-        LOG.info("Inicia el listado de todos los usuarios");
+    public List<UsuarioTypeResponse> listarTodosLosUsuario() {
+        LOG.info("inicia proceso de listar todos los usuarios impl");
         try{
             PanacheQuery listQuery = usuarioDao.findAll();
             List<Usuario> usuario = listQuery.list();
-            UsuarioTypeResponse usuarioTypeResponse = usuarioMapper.usuariosTypeListEntityToTypeResponse(usuario);
-            return usuarioTypeResponse;
+            LOG.info("Se finaliza proceso de listar todos los usuarios Impl");
+            return usuarioMapper.usuariosTypeListEntityToTypeResponse(usuario);
         }catch(ApplicationException e){
             LOG.error("Se presento un error al listar todos los usuario"+ e.getMessage());
             throw new ApplicationException(ERROR_SERVICIO + e.getMessage());

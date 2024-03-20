@@ -17,8 +17,13 @@ import jakarta.validation.Valid;
 
 
 @Path("/v1/es")
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2024-03-18T15:31:43.023791600-05:00[America/Bogota]", comments = "Generator version: 7.4.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2024-03-19T21:12:07.481166400-05:00[America/Bogota]", comments = "Generator version: 7.4.0")
 public interface V1UsuarioApi {
+
+    @GET
+    @Path("/bucarUsuarioPorId/{idtbl_user}")
+    @Produces({ "application/json" })
+    Response bucarUsuarioPorId(@PathParam("idtbl_user") Integer idtblUser);
 
     @POST
     @Path("/crearUsuario")
@@ -37,12 +42,7 @@ public interface V1UsuarioApi {
     Response eliminarUsuario(@PathParam("idtbl_user") Integer idtblUser);
 
     @GET
-    @Path("/listarUsuarios")
+    @Path("/listarTodosLosUsuario")
     @Produces({ "application/json" })
     Response listarTodosLosUsuario();
-
-    @GET
-    @Path("/listarUsuario/{idtbl_user}")
-    @Produces({ "application/json" })
-    Response listarUsuario(@PathParam("idtbl_user") Integer idtblUser);
 }

@@ -20,7 +20,7 @@ public class UsuarioController implements V1UsuarioApi {
 
     @Override
     public Response crearUsuario(UsuarioTypeInput usuarioTypeInput) {
-        LOG.info("Se inicia crear usuario controller");
+        LOG.info("Inicia proceso de crear usuario controller");
         UsuarioTypeResponse usuarioType = null;
         try{
          usuarioType =  usuarioServiceImpl.crearUsuario(usuarioTypeInput);
@@ -28,13 +28,21 @@ public class UsuarioController implements V1UsuarioApi {
             LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "C");
             return  Response.status(Response.Status.BAD_REQUEST).entity(usuarioType).build();
         }
-        LOG.info("Finaliza crear usuario controller");
+        LOG.info("Finaliza proceso de crear usuario controller");
         return Response.status(Response.Status.CREATED).entity(usuarioType).build();
     }
     @Override
     public Response eliminarUsuario(Integer idtblUser) {
-        LOG.info("Termina proceso de eliminar usuario");
-        usuarioServiceImpl.eliminarUsuario(idtblUser);
+        LOG.info("Inicia proceso de eliminar usuario Controller");
+        UsuarioTypeResponse usuarioTypeResponse = null;
+        try {
+            usuarioServiceImpl.eliminarUsuario(idtblUser);
+        } catch (ApplicationException e) {
+            LOG.error("Se presento el siguient error eliminando el usuario controller " + e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+        LOG.info("Finaliza proceso de editar usuario por ID controller");
+        return Response.status(Response.Status.OK).entity(usuarioTypeResponse).build();
     }
 
     @Override
@@ -51,20 +59,29 @@ public class UsuarioController implements V1UsuarioApi {
         return Response.status(Response.Status.OK).entity(usuarioTypeResponse).build();
     }
     @Override
-    public Response listarUsuario(Integer idtblUser) {
-        LOG.info("inicia proceso de listar al usuario por ID controller");
+    public Response bucarUsuarioPorId(Integer idtblUser) {
+        LOG.info("Inicia proceso de listar al usuario por ID controller");
         UsuarioTypeResponse usuarioTypeResponse = null;
         try {
-            usuarioTypeResponse = usuarioServiceImpl.listarUsuario(idtblUser);
+            usuarioTypeResponse = usuarioServiceImpl.bucarUsuarioPorId(idtblUser);
         }catch (ApplicationException e){
             LOG.error(Constant.ERROR_SERVICIO + e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(usuarioTypeResponse).build();
         }
-        LOG.info("Se finaliza proceso de editar usuario controller");
+        LOG.info("Finaliza proceso de editar usuario por ID controller");
         return Response.status(Response.Status.OK).entity(usuarioTypeResponse).build();
     }
     @Override
     public Response listarTodosLosUsuario() {
-        return usuarioServiceImpl.listarTodosLosUsuario();
+        LOG.info("Inicia proceso de listar todos los usuario Controller");
+        List<UsuarioTypeResponse> response = null;
+        try{
+            response = usuarioServiceImpl.listarTodosLosUsuario();
+        }catch (ApplicationException e){
+            LOG.error("Se presento un error en el metodo listarTodosLosUsuario controller"+ e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        LOG.info("Finaliza el metodo listarTodosLosUsuario Controller");
+        return Response.status(Response.Status.OK).entity(response).build();
     }
 }
