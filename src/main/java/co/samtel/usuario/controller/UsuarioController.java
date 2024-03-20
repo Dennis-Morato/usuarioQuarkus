@@ -67,7 +67,7 @@ public class UsuarioController implements V1UsuarioApi {
         try {
             usuarioTypeResponse = usuarioServiceImpl.bucarUsuarioPorId(idtblUser);
         }catch (ApplicationException e){
-            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "buscar al usuario por ID controller");
+            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "Buscar al usuario por ID controller");
             return Response.status(Response.Status.BAD_REQUEST).entity(usuarioTypeResponse).build();
         }
         LOG.info("Finaliza proceso de editar usuario por ID controller");
@@ -80,7 +80,7 @@ public class UsuarioController implements V1UsuarioApi {
         try{
             response = usuarioServiceImpl.listarTodosLosUsuario();
         }catch (ApplicationException e){
-            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "listar todos los usuario Controller");
+            LOG.error(Constant.ERROR_SERVICIO + e.getMessage() + "Listar todos los usuario Controller");
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
         LOG.info("Finaliza el metodo listarTodosLosUsuario Controller");
